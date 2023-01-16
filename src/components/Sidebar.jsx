@@ -7,13 +7,14 @@ import { useStateContext } from "../contexts/ContextProvider";
 import { links } from "../data/dummy";
 
 const Sidebar = () => {
-const {activeMenu, setActiveMenu, screenSize} = useStateContext();
+  const { activeMenu, setActiveMenu, screenSize, currentColor } =
+    useStateContext();
 
-const handleCloseSidebar = () => {
-  if(activeMenu && screenSize <= 900) {
-    setActiveMenu(false)
-  }
-}
+  const handleCloseSidebar = () => {
+    if (activeMenu && screenSize <= 900) {
+      setActiveMenu(false);
+    }
+  };
 
   const activeLink =
     "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-white text-md m-2";
@@ -34,8 +35,8 @@ const handleCloseSidebar = () => {
             <TooltipComponent content="Menu" position="BottomCenter">
               <button
                 type="button"
-                onClick={() => setActiveMenu((prevActiveMenu) => !prevActiveMenu)}
-                className="text-xl  p-3 hover:bg-light-grey mt-4 block  "
+                onClick={() => setActiveMenu(!activeMenu)}
+                className="text-xl rounded-full  p-3 hover:bg-light-grey mt-4 block md:hidden  "
               >
                 <MdOutlineCancel />
               </button>
@@ -44,12 +45,17 @@ const handleCloseSidebar = () => {
           <div className="mt-10 ">
             {links.map((item) => (
               <div key={item.title}>
-                <p className="text-gray-400 m-3 mt-4 uppercase">{item.title}</p>
+                <p className="text-gray-400 dark:text-gray-400 m-3 mt-4 uppercase">
+                  {item.title}
+                </p>
                 {item.links.map((Link) => (
                   <NavLink
                     to={`/${Link.name}`}
                     key={Link.name}
                     onClick={handleCloseSidebar}
+                    style={({ isActive }) => ({
+                      backgroundColor: isActive ? currentColor : "",
+                    })}
                     className={({ isActive }) =>
                       isActive ? activeLink : normalLink
                     }
