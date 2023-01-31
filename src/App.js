@@ -5,7 +5,7 @@ import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
 import { Navbar, Footer, Sidebar, ThemeSettings } from "./components";
 import {
-  ECommerce,
+  Ecommerce,
   Orders,
   Calendar,
   Employees,
@@ -13,16 +13,17 @@ import {
   Pyramid,
   Customers,
   Kanban,
+  Line,
   Area,
   Bar,
   Pie,
-  Line,
   Financial,
   ColorPicker,
   ColorMapping,
   Editor,
 } from "./pages";
 import "./App.css";
+
 import { useStateContext } from "./contexts/ContextProvider";
 
 const App = () => {
@@ -44,6 +45,7 @@ const App = () => {
       setCurrentMode(currentThemeMode);
     }
   }, []);
+
   return (
     <div className={currentMode === "Dark" ? "dark" : ""}>
       <BrowserRouter>
@@ -76,31 +78,29 @@ const App = () => {
                 : "bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 "
             }
           >
-            <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
+            <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
               <Navbar />
             </div>
             <div>
               {themeSettings && <ThemeSettings />}
+
               <Routes>
-                {/* Dashboard */}
-                <Route path="/" element={<ECommerce />} />
-                <Route path="/ECommerce" element={<ECommerce />} />
+                {/* dashboard  */}
+                <Route path="/" element={<Ecommerce />} />
+                <Route path="/Ecommerce" element={<Ecommerce />} />
 
-                {/* Pages */}
-
+                {/* pages  */}
                 <Route path="/orders" element={<Orders />} />
                 <Route path="/employees" element={<Employees />} />
                 <Route path="/customers" element={<Customers />} />
 
-                {/* Apps */}
-
+                {/* apps  */}
                 <Route path="/kanban" element={<Kanban />} />
                 <Route path="/editor" element={<Editor />} />
                 <Route path="/calendar" element={<Calendar />} />
                 <Route path="/color-picker" element={<ColorPicker />} />
 
-                {/* Charts */}
-
+                {/* charts  */}
                 <Route path="/line" element={<Line />} />
                 <Route path="/area" element={<Area />} />
                 <Route path="/bar" element={<Bar />} />
@@ -108,7 +108,7 @@ const App = () => {
                 <Route path="/financial" element={<Financial />} />
                 <Route path="/color-mapping" element={<ColorMapping />} />
                 <Route path="/pyramid" element={<Pyramid />} />
-                <Route path="/stacked" elemen={<Stacked />} />
+                <Route path="/stacked" element={<Stacked />} />
               </Routes>
             </div>
             <Footer />
